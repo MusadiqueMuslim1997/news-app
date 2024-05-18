@@ -1,12 +1,12 @@
 
 
 
-let apiKey = '7c21d020c7be4608b7816af5393971dd';
-let url = 'https://newsapi.org/v2/everything?q=tesla';
+let apiKey = 'pub_4443486bab1cb3f1d1124664c510cf1cda6f7';
+let url = 'https://newsapi.org/v2/everything?q=pakistan';
 
 
 async function news(){
-    let response = await fetch(url + `&apiKey=${apiKey}`)
+    let response = await fetch(`https://newsdata.io/api/1/latest?apikey=pub_4443486bab1cb3f1d1124664c510cf1cda6f7&q=pakistan&language=en`)
     let data = await response.json();
     console.log(data);
 }
