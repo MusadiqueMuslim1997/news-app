@@ -3,13 +3,29 @@
 
 let apiKey = 'pub_4443486bab1cb3f1d1124664c510cf1cda6f7';
 let url = 'https://newsapi.org/v2/everything?q=pakistan';
+let card = document.getElementById('card');
+        let searchInput = document.getElementById('search');
 
-let vid = document.getElementById("vid")
-async function news() {
-    let response = await fetch(`https://newsdata.io/api/1/news?apikey=pub_4443486bab1cb3f1d1124664c510cf1cda6f7&q=cricket `)
-    let data = await response.json();
-    console.log(data);
-    vid.innerHTML = data.results[0].source_url;
+        async function news(title) {
+            let response = await fetch(`https://newsdata.io/api/1/news?apikey=pub_4443486bab1cb3f1d1124664c510cf1cda6f7&q=${title}`);
+            let data = await response.json();
+            console.log(data);
 
-}
-news()
+            card.innerHTML = '';  // Clear previous results
+
+            data.results.forEach(element => {
+                card.innerHTML += `
+                <div class="card">
+                    <div class="iframe"><img src="${element.image_url}" alt="News Image"></div>
+                    <div class="channel">${element.country}</div>
+                    <div class="content">${element.title}</div>
+                </div>`;
+            });
+        }
+
+        function search() {
+            news(searchInput.value);
+        }
+
+        // Call news with a default value on page load
+        news('news');
